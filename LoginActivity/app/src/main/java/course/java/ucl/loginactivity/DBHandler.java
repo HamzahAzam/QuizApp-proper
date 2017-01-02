@@ -29,6 +29,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_SCORE = "score";
 
+
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -68,6 +69,7 @@ public class DBHandler extends SQLiteOpenHelper {
             values.put(KEY_USERNAME, user.getUserName()); // Username
             values.put(KEY_EMAIL, user.getEmail()); // User email
             values.put(KEY_PASSWORD, user.getPassword()); // User password
+
 
             // Inserting Row
             db.insert(TABLE_USERS, null, values);
@@ -164,6 +166,7 @@ public class DBHandler extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(KEY_USERNAME, attempt.getUserName()); // Username
             values.put(KEY_SCORE, attempt.getScore()); // User score
+
 
             // Inserting Row
             db.insert(TABLE_ATTEMPTS, null, values);

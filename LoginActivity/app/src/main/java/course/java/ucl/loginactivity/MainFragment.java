@@ -5,18 +5,22 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.util.Log;
 
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.widget.Adapter;
 
 
 public class MainFragment extends Fragment  {
@@ -34,10 +38,6 @@ public class MainFragment extends Fragment  {
 
     private static final String TAG = "COMP211P";
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,17 +66,9 @@ public class MainFragment extends Fragment  {
                 //Fragment fragment = manager.findFragmentById(R.id.fragment_container);
 
                 bundle.putInt("loggedin",LoggedIn);
-               /* Toast.makeText(getActivity(),
-                               "Redirecting...", Toast.LENGTH_SHORT).show(); */
-               // Intent intent = new Intent(getApplicationContext(), LoginMenu.class);
-               // startActivity(intent);
-
-              //  FragmentManager fm = getFragmentManager();
-
-                   getActivity().getSupportFragmentManager().popBackStack();
-                   Fragment fragment = new LoginMenu();
-                   fragment.setArguments(bundle);
-                   manager.beginTransaction().replace(R.id.fragment_container, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
+                Fragment fragment = new RegistereUsersList();
+                fragment.setArguments(bundle);
+                manager.beginTransaction().replace(R.id.fragment_container, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
             }
         });
 
@@ -86,11 +78,46 @@ public class MainFragment extends Fragment  {
 
                // Intent intent = new Intent(getApplicationContext(), RegisterNewUser.class);
                // startActivity(intent);
-                LoggedIn = bundle.getInt("loggedin");
-                if(LoggedIn==1) {
-                    Intent intent = new Intent(getActivity(), SimpleFrag.class);
-                    startActivity(intent);
+                FragmentManager manager = getFragmentManager();
+                Fragment fragment = manager.findFragmentById(R.id.fragment_container);
+              //LoggedIn = fragment.getArguments().getInt("loggedin");
+
+
+                 //   fragment = new QuizActivity();
+                 //   fragment.setArguments(bundle);
+                 //   manager.beginTransaction().replace(R.id.fragment_container, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
+              //  }
+              //  else {
+                /*
+                    Start the quiz session for each logged in user...
+
+                 */
+
+                ArrayList<String> loggedInuser = LoginMenu.getLoggedInUsers();
+             /*   ArrayList<String> listItems=new ArrayList<String>();
+                ArrayAdapter<String> adapter;
+
+                loggedInUser.getAdapter().
+
+                adapter = loggedInUser.getAdapter(); */
+                if(loggedInuser.isEmpty()) {
+                    Toast.makeText(getActivity(),
+                            "Please Login First...", Toast.LENGTH_SHORT).show();
                 }
+                else {
+                    for (String userName : loggedInuser) {
+                     /*   Intent intent = new Intent(fragment.getActivity(), QuizActivity.class);
+                        Bundle b = new Bundle();
+                        b.putString("USER",userName);
+                        b.putString("USER",userName);
+                        startActivity(intent); */
+                        Bundle b = new Bundle();
+                        b.putString("USER",userName);
+                        fragment = new LoggedInUsersList();
+                        fragment.setArguments(b);
+                        manager.beginTransaction().replace(R.id.fragment_container, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
+                    }
+              }
             }
         });
 

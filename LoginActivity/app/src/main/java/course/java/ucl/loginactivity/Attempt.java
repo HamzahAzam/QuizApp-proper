@@ -7,6 +7,7 @@ public class Attempt {
     private String userName;
     private int score;
 
+
     public Attempt() {
     }
 

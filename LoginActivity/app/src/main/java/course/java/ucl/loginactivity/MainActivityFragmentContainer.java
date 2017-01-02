@@ -17,11 +17,13 @@ public class MainActivityFragmentContainer extends FragmentActivity  {
         // Check that the activity is using the layout version with
         // the fragment_container FrameLayout
         if (fragment == null) {
-            fragment = new MainFragment();
+            //fragment = new MainFragment();
+            fragment = new RegistereUsersList();
             manager.beginTransaction()
                     .add(R.id.fragment_container, fragment)
                     .commit();
         }
 
     }
+
 }

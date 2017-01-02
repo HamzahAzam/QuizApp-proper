@@ -7,6 +7,7 @@ public class User {
     private String userName;
     private String email;
     private String password;
+    private int loggedIn;
 
     public User() {
     }
@@ -32,6 +33,9 @@ public class User {
     public String getPassword() {
         return password;
     }
+    public int getLogged() { return loggedIn; }
+    public void setLoggedIn(int loggedIn) { this.loggedIn = loggedIn; }
+
 
     public void setPassword(String password) {
         this.password = password;
