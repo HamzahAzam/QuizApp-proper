@@ -10,7 +10,7 @@ public class MainActivityFragmentContainer extends FragmentActivity  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_conatiner);
+        setContentView(R.layout.activity_main);
 
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragment_container);
